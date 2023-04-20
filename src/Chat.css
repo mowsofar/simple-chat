@@ -1,5 +1,5 @@
 .chat {
-    height: 600px;
+    height: 650px;
     width: 800px;
     background-color: #fcebde;
     margin-left: auto;
@@ -14,21 +14,34 @@
 
 .message-form {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     margin-top: 40px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
 }
 
 input {
     width: 500px;
     height: 25px;
+    margin: 5px;
 }
 
 button {
-    margin-left: 20px;
+    margin-right: 40px;
     background-color: #b69b84;
+    margin-top: 30px;
     width: 100px;
+    height: 40px;
     border: none;
     border-radius: 15px;
+}
+
+p {
+    display: inline-block;
 }
 
 .message-block {
