@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect, useRef, useState} from 'react';
 import './Chat.css';
 import {useAppDispatch, useTypedSelector} from "./store/hooks";
 import {setMessages} from "./store/MessagesSlice";
@@ -18,6 +18,8 @@ const Chat = () => {
     const [author, setAuthor] = useState<string>('');
     const [text, setText] = useState<string>('');
 
+    const chatRef = useRef<HTMLDivElement>(null);
+
 
     useEffect(() => {
         ws.onmessage = (event: MessageEvent<string>) => {
@@ -25,10 +27,13 @@ const Chat = () => {
         }
     }, [])
 
-    debugger
     const messages = useTypedSelector(state => state.ms.messages);
-    debugger
-    console.log(messages);
+
+    useEffect(() => {
+        if (messages && chatRef.current)   {
+            chatRef.current.scrollTop = chatRef.current.scrollHeight
+        }
+    }, [messages])
 
 
     const authorHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +52,7 @@ const Chat = () => {
     return (
         <div className='chat'>
 
-            <div className='messages'>
+            <div className='messages' ref={chatRef}>
                 {messages?.map((m, index) => <Message message={m} index={index}/>)}
             </div>
 
@@ -63,7 +68,7 @@ const Chat = () => {
                     </div>
 
                 </div>
-                <button onClick={() => onButtonClick()}>Отправить</button>
+                <button onClick={onButtonClick}>Отправить</button>
             </div>
 
         </div>
