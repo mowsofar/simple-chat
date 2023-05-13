@@ -1,2 +1,2 @@
-# Simple chat TypeScropt & WebSockets
+# Simple chat TypeScript & WebSockets
 
